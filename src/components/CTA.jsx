@@ -11,7 +11,7 @@ const CTA = ({ onBookClick }) => {
           <p>We are currently accepting new patients. Book an appointment to get started.</p>
           <div className="cta-actions">
             <Button onClick={onBookClick}>Book Appointment</Button>
-            <Button variant="text" className="cta-text-link">Call the Clinic</Button>
+            <a href="tel:5551234567" className="btn btn-text cta-text-link">Call the Clinic</a>
           </div>
         </div>
       </div>
