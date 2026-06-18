@@ -20,7 +20,7 @@ const Hero = ({ onBookClick }) => {
           </p>
           <div className="hero-actions">
             <Button icon={<CalendarIcon />} onClick={onBookClick}>Book Appointment</Button>
-            <Button variant="outline">About Dr. Sarah</Button>
+            <a href="#about" className="btn btn-outline">About Dr. Sarah</a>
           </div>
         </div>
         <div className="hero-image-wrapper">

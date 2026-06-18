@@ -280,6 +280,22 @@
   box-shadow: 0 0 0 3px var(--color-primary-light);
 }
 
+.form-group input.input-error {
+  border-color: #EF4444;
+  background-color: #FEF2F2;
+}
+
+.form-group input.input-error:focus {
+  box-shadow: 0 0 0 3px #FEE2E2;
+}
+
+.error-message {
+  color: #EF4444;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
 /* Actions block */
 .booking-actions {
   display: flex;
@@ -374,6 +390,7 @@
 @media (max-width: 767px) {
   .booking-modal-card {
     padding: 28px 20px;
+    border-radius: 12px;
   }
   .booking-type-toggle {
     gap: 8px;
@@ -382,14 +399,21 @@
     padding: 12px 8px;
     font-size: 13px;
     gap: 6px;
+    border-radius: 8px;
   }
   .booking-days-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
   }
+  .day-select-btn {
+    border-radius: 8px;
+  }
   .booking-time-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
+  }
+  .time-select-btn {
+    border-radius: 8px;
   }
   .form-row {
     grid-template-columns: 1fr;
@@ -400,5 +424,6 @@
   }
   .booking-actions button {
     width: 100%;
+    border-radius: var(--radius-full);
   }
 }

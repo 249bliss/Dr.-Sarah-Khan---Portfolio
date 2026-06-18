@@ -17,7 +17,7 @@ const Navbar = ({ onBookClick }) => {
     <header className="navbar">
       <div className="container navbar-container">
         <div className="navbar-logo">
-          <span>Dr. </span><span className="logo-text">Sarah Khan</span>
+          <a href="#"><span>Dr. </span><span className="logo-text">Sarah Khan</span></a>
         </div>
 
         {/* Desktop nav */}

@@ -8,6 +8,7 @@ const BookingModal = ({ isOpen, onClose }) => {
   const [date, setDate] = useState('');
   const [timeSlot, setTimeSlot] = useState('');
   const [visitType, setVisitType] = useState('virtual');
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -106,11 +107,31 @@ const BookingModal = ({ isOpen, onClose }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone) return;
+    
+    const newErrors = {};
+    if (!formData.name.trim()) {
+      newErrors.name = 'Please fill in your full name';
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = 'Please fill in your email address';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Please fill in your phone number';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
     
     // Switch to step 1.5 (loading screen)
     setStep('loading');
@@ -126,6 +147,7 @@ const BookingModal = ({ isOpen, onClose }) => {
     setDate('');
     setTimeSlot('');
     setVisitType('virtual');
+    setErrors({});
     setFormData({ name: '', email: '', phone: '', notes: '' });
     onClose();
   };
@@ -233,11 +255,12 @@ const BookingModal = ({ isOpen, onClose }) => {
                   type="text"
                   id="name"
                   name="name"
-                  required
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="e.g. John Doe"
+                  className={errors.name ? 'input-error' : ''}
                 />
+                {errors.name && <span className="error-message">{errors.name}</span>}
               </div>
 
               <div className="form-row">
@@ -247,11 +270,12 @@ const BookingModal = ({ isOpen, onClose }) => {
                     type="email"
                     id="email"
                     name="email"
-                    required
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="john@example.com"
+                    className={errors.email ? 'input-error' : ''}
                   />
+                  {errors.email && <span className="error-message">{errors.email}</span>}
                 </div>
                 <div className="form-group">
                   <label htmlFor="phone">Phone Number *</label>
@@ -259,11 +283,12 @@ const BookingModal = ({ isOpen, onClose }) => {
                     type="tel"
                     id="phone"
                     name="phone"
-                    required
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="(555) 000-0000"
+                    className={errors.phone ? 'input-error' : ''}
                   />
+                  {errors.phone && <span className="error-message">{errors.phone}</span>}
                 </div>
               </div>
 
