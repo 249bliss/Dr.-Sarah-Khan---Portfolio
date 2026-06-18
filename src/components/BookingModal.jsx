@@ -79,7 +79,14 @@ const BookingModal = ({ isOpen, onClose }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone) return;
-    setStep(3);
+    
+    // Switch to step 1.5 (loading screen)
+    setStep('loading');
+    
+    // Simulate API request/submission
+    setTimeout(() => {
+      setStep(3);
+    }, 1500);
   };
 
   const handleClose = () => {
@@ -240,6 +247,14 @@ const BookingModal = ({ isOpen, onClose }) => {
                 </Button>
               </div>
             </form>
+          </div>
+        )}
+
+        {step === 'loading' && (
+          <div className="booking-step booking-loading-step">
+            <div className="booking-spinner"></div>
+            <h2>Booking your appointment...</h2>
+            <p className="loading-subtext">Please wait while we reserve your consultation slot.</p>
           </div>
         )}
 
