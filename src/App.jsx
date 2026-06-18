@@ -19,6 +19,18 @@ function App() {
   const openBooking = () => setIsBookingOpen(true);
   const closeBooking = () => setIsBookingOpen(false);
 
+  const lenisRef = React.useRef(null);
+
+  useEffect(() => {
+    if (lenisRef.current) {
+      if (isBookingOpen) {
+        lenisRef.current.stop();
+      } else {
+        lenisRef.current.start();
+      }
+    }
+  }, [isBookingOpen]);
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -31,6 +43,7 @@ function App() {
       touchMultiplier: 2,
       infinite: false,
     });
+    lenisRef.current = lenis;
 
     function raf(time) {
       lenis.raf(time);

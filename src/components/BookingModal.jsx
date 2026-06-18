@@ -120,7 +120,12 @@ const BookingModal = ({ isOpen, onClose }) => {
   const days = getAvailableDays();
 
   return (
-    <div className="booking-overlay" onClick={handleClose}>
+    <div 
+      className="booking-overlay" 
+      onClick={handleClose}
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+    >
       <div className="booking-modal-card" onClick={(e) => e.stopPropagation()}>
         <button className="booking-close-btn" onClick={handleClose} aria-label="Close modal">
           <X size={20} />
