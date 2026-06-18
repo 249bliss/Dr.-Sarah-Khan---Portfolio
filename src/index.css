@@ -47,6 +47,14 @@ body {
   font-weight: 300;
 }
 
+/* Modal Open Locks */
+html.modal-open,
+body.modal-open {
+  overflow: hidden !important;
+  height: 100vh !important;
+  touch-action: none;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-dark);
   line-height: 1.2;

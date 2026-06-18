@@ -21,8 +21,19 @@ const BookingModal = ({ isOpen, onClose }) => {
       if (e.key === 'Escape' && isOpen) onClose();
     };
     
+    // Prevent default scroll behavior on body/html when modal is open
+    const preventDefault = (e) => {
+      // If the scroll event happens on the overlay background or outside the modal-card, prevent it
+      if (e.target.classList.contains('booking-overlay')) {
+        e.preventDefault();
+      }
+    };
+
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      // Add non-passive event listeners to ensure preventDefault() works
+      window.addEventListener('wheel', preventDefault, { passive: false });
+      window.addEventListener('touchmove', preventDefault, { passive: false });
     } else {
       document.body.style.overflow = '';
     }
@@ -30,6 +41,8 @@ const BookingModal = ({ isOpen, onClose }) => {
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('wheel', preventDefault);
+      window.removeEventListener('touchmove', preventDefault);
       document.body.style.overflow = '';
     };
   }, [isOpen, onClose]);

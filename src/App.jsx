@@ -25,8 +25,12 @@ function App() {
     if (lenisRef.current) {
       if (isBookingOpen) {
         lenisRef.current.stop();
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
       } else {
         lenisRef.current.start();
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
       }
     }
   }, [isBookingOpen]);
