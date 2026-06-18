@@ -1,0 +1,22 @@
+.reveal-wrapper {
+  opacity: 0;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal-up {
+  transform: translateY(40px);
+}
+
+.reveal-left {
+  transform: translateX(40px);
+}
+
+.reveal-right {
+  transform: translateX(-40px);
+}
+
+.reveal-wrapper.reveal-active {
+  opacity: 1;
+  transform: translate(0, 0);
+}

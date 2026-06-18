@@ -1,0 +1,66 @@
+.cta-banner {
+  background: linear-gradient(180deg, var(--color-primary-lighter) 0%, var(--color-white) 100%);
+  border-radius: var(--radius-lg);
+  padding: 80px 24px;
+  text-align: center;
+  border: 1px solid var(--color-primary-light);
+}
+
+.cta-banner h2 {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.cta-banner p {
+  color: var(--color-text-body);
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.cta-text-link {
+  font-weight: 600;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cta-banner {
+    padding: 64px 32px;
+  }
+  .cta-banner h2 {
+    font-size: 32px;
+  }
+  .cta-banner p {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .cta-banner {
+    padding: 48px 20px;
+    border-radius: 14px;
+  }
+  .cta-banner h2 {
+    font-size: 22px;
+  }
+  .cta-banner p {
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  .cta-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .cta-actions > * {
+    width: 100%;
+    min-height: 44px;
+  }
+}
