@@ -23,8 +23,8 @@ const Navbar = () => {
         {/* Desktop nav */}
         <nav className="navbar-links">
           <a href="#services">Services</a>
-          <a href="#visit">Your Visit</a>
-          <a href="#patients">Patients</a>
+          <a href="#process">Your Visit</a>
+          <a href="#testimonials">Patients</a>
           <a href="#about">About</a>
           <a href="#faq">FAQ</a>
         </nav>
@@ -51,8 +51,8 @@ const Navbar = () => {
       <div className={`mobile-menu ${menuOpen ? 'visible' : ''}`}>
         <nav className="mobile-nav-links">
           <a href="#services" onClick={closeMenu}>Services</a>
-          <a href="#visit" onClick={closeMenu}>Your Visit</a>
-          <a href="#patients" onClick={closeMenu}>Patients</a>
+          <a href="#process" onClick={closeMenu}>Your Visit</a>
+          <a href="#testimonials" onClick={closeMenu}>Patients</a>
           <a href="#about" onClick={closeMenu}>About</a>
           <a href="#faq" onClick={closeMenu}>FAQ</a>
         </nav>

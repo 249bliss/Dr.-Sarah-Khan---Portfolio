@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Testimonials.css';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import CountUp from './ui/CountUp';
 
 const Testimonials = () => {
   const testimonials = [
@@ -41,12 +42,12 @@ const Testimonials = () => {
           <h2>What patients often say after their first visit.</h2>
           <div className="testimonials-stats">
             <div className="t-stat">
-              <span className="t-stat-num">4.9<span className="t-stat-star">★</span></span>
+              <span className="t-stat-num"><CountUp end={4.9} decimals={1} /><span className="t-stat-star">★</span></span>
               <span className="t-stat-label">PATIENT RATING</span>
             </div>
             <div className="t-stat-divider"></div>
             <div className="t-stat">
-              <span className="t-stat-num">4,800+</span>
+              <span className="t-stat-num"><CountUp end={4800} />+</span>
               <span className="t-stat-label">PATIENTS TREATED</span>
             </div>
           </div>

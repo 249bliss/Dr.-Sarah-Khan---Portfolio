@@ -1,6 +1,7 @@
 import React from 'react';
 import './Hero.css';
 import Button from './ui/Button';
+import CountUp from './ui/CountUp';
 import heroImage from '../assets/images/hero-image.png';
 
 const CalendarIcon = () => (
@@ -39,17 +40,17 @@ const Hero = () => {
         <div className="container">
           <div className="hero-stats">
             <div className="stat-item">
-              <div className="stat-number">18<span className="stat-blue">+yrs</span></div>
+              <div className="stat-number"><CountUp end={18} /><span className="stat-blue">+yrs</span></div>
               <div className="stat-label">Caring for patients</div>
             </div>
             <div className="stat-divider"></div>
             <div className="stat-item">
-              <div className="stat-number">4.9<span className="stat-blue">★</span></div>
+              <div className="stat-number"><CountUp end={4.9} decimals={1} /><span className="stat-blue">★</span></div>
               <div className="stat-label">From verified patients</div>
             </div>
             <div className="stat-divider"></div>
             <div className="stat-item">
-              <div className="stat-number">4,800<span className="stat-blue">+</span></div>
+              <div className="stat-number"><CountUp end={4800} /><span className="stat-blue">+</span></div>
               <div className="stat-label">Visits Across long-term care</div>
             </div>
           </div>
