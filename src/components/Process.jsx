@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Process.css';
 
 const Process = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const stepRefs = useRef([]);
   const steps = [
     {
       title: "Book your initial visit",
@@ -25,6 +27,37 @@ const Process = () => {
     }
   ];
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -40% 0px',
+      threshold: 0,
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = stepRefs.current.indexOf(entry.target);
+          if (index !== -1) {
+            setActiveIndex(index);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    stepRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      stepRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []);
+
   return (
     <section id="process" className="section section-alt process">
       <div className="container process-container">
@@ -35,7 +68,11 @@ const Process = () => {
         </div>
         <div className="process-steps">
           {steps.map((step, index) => (
-            <div key={index} className={`process-step ${index === 0 ? 'active' : ''}`}>
+            <div 
+              key={index} 
+              ref={(el) => (stepRefs.current[index] = el)}
+              className={`process-step ${index === activeIndex ? 'active' : ''}`}
+            >
               <div className="step-number">{index + 1}</div>
               <div className="step-content">
                 <h3>{step.title}</h3>

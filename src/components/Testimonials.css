@@ -12,40 +12,36 @@
 .testimonials-stats {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
 }
 
 .t-stat {
-  text-align: right;
+  background-color: var(--color-primary-lighter);
+  padding: 16px 24px;
+  border-radius: 12px;
+  text-align: left;
+  min-width: 160px;
 }
 
 .t-stat-num {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--color-text-dark);
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 4px;
+  margin-bottom: 4px;
 }
 
 .t-stat-star {
   color: var(--color-primary);
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .t-stat-label {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--color-text-light);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.t-stat-divider {
-  width: 1px;
-  height: 40px;
-  background-color: var(--color-border);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-body);
 }
 
 .testimonial-card {
@@ -58,6 +54,28 @@
   align-items: center;
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  will-change: transform, opacity;
+  min-height: 296px; /* Stable min-height to prevent button layout shifts */
+}
+
+.testimonial-card::after {
+  content: '\201d';
+  position: absolute;
+  top: -20px;
+  right: 40px;
+  font-size: 200px;
+  color: var(--color-primary-lighter);
+  line-height: 1;
+  font-family: serif;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.star-rating-num {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-body);
 }
 
 .testimonial-image-col {
@@ -77,27 +95,33 @@
 }
 
 .quote-icon {
-  color: var(--color-primary-light);
-  position: absolute;
-  top: -24px;
-  right: 0;
-  z-index: 0;
+  display: none;
 }
 
 .stars {
   color: #FBBF24;
-  margin-bottom: 16px;
-  font-size: 20px;
+  margin-bottom: 24px;
+  font-size: 14px;
   position: relative;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  color: var(--color-text-body);
+}
+
+.stars .star {
+  color: #FBBF24;
 }
 
 .quote-text {
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 400;
+  font-style: italic;
   color: var(--color-text-dark);
-  line-height: 1.4;
-  margin-bottom: 24px;
+  line-height: 1.6;
+  margin-bottom: 32px;
   position: relative;
   z-index: 1;
 }
@@ -117,6 +141,7 @@
   color: var(--color-text-light);
 }
 
+/* --- Carousel Controls --- */
 .carousel-controls {
   display: flex;
   justify-content: center;
@@ -125,9 +150,9 @@
 }
 
 .carousel-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
   border: 1px solid var(--color-border);
   background-color: var(--color-white);
   color: var(--color-text-body);
@@ -152,6 +177,35 @@
   background-color: var(--color-primary-hover);
 }
 
+.carousel-btn.btn-inactive {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-light);
+  cursor: default;
+}
+
+/* --- Slide Keyframes (transform only, no layout impact) --- */
+@keyframes slideOutLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-50px); }
+}
+
+@keyframes slideOutRight {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(50px); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* --- Responsive --- */
 @media (min-width: 768px) and (max-width: 1023px) {
   .testimonials-header {
     flex-direction: column;
@@ -211,6 +265,7 @@
     text-align: center;
     padding: 24px 20px;
     gap: 20px;
+    min-height: 380px; /* Stable min-height for mobile view */
   }
   .testimonial-image-col {
     display: flex;
@@ -224,10 +279,8 @@
   .quote-text {
     font-size: 16px;
   }
-  .quote-icon {
-    right: 50%;
-    transform: translateX(50%);
-    top: -16px;
+  .stars {
+    justify-content: center;
   }
   .carousel-btn {
     width: 40px;
