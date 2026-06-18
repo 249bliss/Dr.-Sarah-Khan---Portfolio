@@ -27,6 +27,25 @@
   animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   max-height: 90vh;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.booking-modal-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.booking-modal-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.booking-modal-card::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 20px;
+}
+
+.booking-modal-card::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-light);
 }
 
 .booking-close-btn {
