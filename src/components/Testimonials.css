@@ -56,7 +56,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
   overflow: hidden;
   will-change: transform, opacity;
-  min-height: 296px; /* Stable min-height to prevent button layout shifts */
+  min-height: 350px; /* Stable desktop min-height to prevent button layout shifts */
 }
 
 .testimonial-card::after {
