@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -11,8 +11,14 @@ import CTA from './components/CTA';
 import Footer from './components/Footer';
 import Reveal from './components/ui/Reveal';
 import CustomCursor from './components/ui/CustomCursor';
+import BookingModal from './components/BookingModal';
 
 function App() {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+
+  const openBooking = () => setIsBookingOpen(true);
+  const closeBooking = () => setIsBookingOpen(false);
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -58,17 +64,19 @@ function App() {
   return (
     <div className="app">
       <CustomCursor />
-      <Navbar />
+      <Navbar onBookClick={openBooking} />
       <main>
-        <Hero />
+        <Hero onBookClick={openBooking} />
         <Reveal><About /></Reveal>
         <Reveal><Services /></Reveal>
         <Reveal><Process /></Reveal>
         <Reveal><Testimonials /></Reveal>
         <Reveal><FAQ /></Reveal>
-        <Reveal><CTA /></Reveal>
+        <Reveal><CTA onBookClick={openBooking} /></Reveal>
       </main>
       <Footer />
+      
+      <BookingModal isOpen={isBookingOpen} onClose={closeBooking} />
     </div>
   );
 }

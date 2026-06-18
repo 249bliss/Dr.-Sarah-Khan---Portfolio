@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import Button from './ui/Button';
 
-const Navbar = () => {
+const Navbar = ({ onBookClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Prevent body scroll when menu is open
@@ -31,7 +31,7 @@ const Navbar = () => {
 
         {/* Desktop CTA */}
         <div className="navbar-action">
-          <Button>Book Appointment</Button>
+          <Button onClick={onBookClick}>Book Appointment</Button>
         </div>
 
         {/* Hamburger button — mobile only */}
@@ -57,7 +57,7 @@ const Navbar = () => {
           <a href="#faq" onClick={closeMenu}>FAQ</a>
         </nav>
         <div className="mobile-menu-cta">
-          <Button onClick={closeMenu}>Book Appointment</Button>
+          <Button onClick={() => { closeMenu(); onBookClick(); }}>Book Appointment</Button>
         </div>
       </div>
     </header>
