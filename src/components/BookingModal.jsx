@@ -36,7 +36,7 @@ const BookingModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  // Generate next 7 available days (excluding Sundays)
+  // Generate available days depending on visit type
   const getAvailableDays = () => {
     const days = [];
     const options = { weekday: 'short', month: 'short', day: 'numeric' };
@@ -48,8 +48,15 @@ const BookingModal = ({ isOpen, onClose }) => {
     }
 
     while (days.length < 6) {
-      // Exclude Sunday (0)
-      if (current.getDay() !== 0) {
+      const dayOfWeek = current.getDay();
+      
+      // Virtual visits: Mon-Fri (1 to 5)
+      // Clinic visits: Mon-Thu (1 to 4) (as Friday clinic is short-hours / administrative, let's say Clinic visits are Mon-Thu)
+      const isValidDay = visitType === 'virtual' 
+        ? (dayOfWeek >= 1 && dayOfWeek <= 5) 
+        : (dayOfWeek >= 1 && dayOfWeek <= 4);
+
+      if (isValidDay) {
         days.push({
           formatted: current.toLocaleDateString('en-US', options),
           value: current.toISOString().split('T')[0],
@@ -62,14 +69,26 @@ const BookingModal = ({ isOpen, onClose }) => {
     return days;
   };
 
-  const timeSlots = [
-    { time: '09:00 AM', period: 'morning' },
-    { time: '10:30 AM', period: 'morning' },
-    { time: '11:15 AM', period: 'morning' },
-    { time: '02:00 PM', period: 'afternoon' },
-    { time: '03:30 PM', period: 'afternoon' },
-    { time: '04:15 PM', period: 'afternoon' }
+  // Virtual slots vs In-clinic slots
+  const virtualSlots = [
+    { time: '09:00 AM' },
+    { time: '10:30 AM' },
+    { time: '11:15 AM' },
+    { time: '02:00 PM' },
+    { time: '03:30 PM' },
+    { time: '04:15 PM' }
   ];
+
+  const clinicSlots = [
+    { time: '08:30 AM' },
+    { time: '10:00 AM' },
+    { time: '11:30 AM' },
+    { time: '01:30 PM' },
+    { time: '03:00 PM' },
+    { time: '04:30 PM' }
+  ];
+
+  const timeSlots = visitType === 'virtual' ? virtualSlots : clinicSlots;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -183,6 +202,10 @@ const BookingModal = ({ isOpen, onClose }) => {
               <span>
                 {days.find(d => d.value === date)?.formatted} at {timeSlot} ({visitType === 'virtual' ? 'Virtual' : 'In-Clinic'})
               </span>
+            </div>
+
+            <div className="booking-info-banner">
+              <p><strong>Please complete all required fields below.</strong> This information is necessary for Dr. Khan's clinic to verify your slot and send your consultation details.</p>
             </div>
 
             <form onSubmit={handleFormSubmit} className="booking-form">

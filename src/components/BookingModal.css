@@ -216,7 +216,23 @@
   border-radius: 10px;
   font-size: 14px;
   font-weight: 500;
+  margin-bottom: 20px;
+}
+
+/* Info banner notice */
+.booking-info-banner {
+  background-color: #FFFBEB;
+  border: 1px solid #FEF3C7;
+  color: #D97706;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.5;
   margin-bottom: 24px;
+}
+
+.booking-info-banner p {
+  margin: 0;
 }
 
 /* Booking Form Elements */
